@@ -1,0 +1,22 @@
+version: '3.4'
+
+services: 
+
+  frontend:
+    image: postservice
+    build:
+      context: postservice
+      dockerfile: Dockerfile
+    environment: 
+      - backendUrl=http://postservice
+    ports:
+      - "6902:80"
+    depends_on: 
+      - userservice
+  backend:
+    image: userservice
+    build: 
+      context: userservice
+      dockerfile: Dockerfile
+    ports: 
+      - "6900:80"
